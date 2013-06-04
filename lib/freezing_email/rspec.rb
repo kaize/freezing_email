@@ -12,7 +12,13 @@ module FreezingEmail::Rspec
       ActionMailer::Base.deliveries.each do |mail|
         name ="#{mail.subject.parameterize.tableize}"
 
-        FreezingEmail::Storage.save(name, mail)
+        FreezingEmail::Storage.save(name, FreezingEmail::Mail.new({
+          subject: mail.subject,
+          body: mail.body,
+          to: mail.to,
+          from: mail.from,
+          generated_in: example_group.example.description
+        }))
       end
     end
   end
