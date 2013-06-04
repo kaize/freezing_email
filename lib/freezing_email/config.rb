@@ -5,10 +5,23 @@ class FreezingEmail::Config
     }
 
     def [](key)
-      raise ConfigEntryNotFound unless @config && @config.has_key?(key)
+      raise FreezingEmail::ConfigEntryNotFound unless key_exists?(key) || defaults_exists?(key)
 
-      @config[key]
+      if key_exists?(key)
+        @config[key]
+      else
+        @@defaults[key]
+      end
     end
+
+    def key_exists?(key)
+      @config && @config.has_key?(key)
+    end
+
+    def defaults_exists?(key)
+      @@defaults.has_key?(key)
+    end
+
 
     def []=(key, value)
       @config ||= {}
