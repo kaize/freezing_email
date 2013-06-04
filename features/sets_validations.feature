@@ -16,18 +16,22 @@ Feature: sets validations
   Scenario: Using Valle automatically sets validations
     When I write to "spec/mailers/user_mailer_spec.rb" with:
       """
-require 'spec_helper'
+      require 'spec_helper'
 
-describe UserMailer do
-  describe "password_reset" do
-    let(:user) { FactoryGirl.create(:user, :password_reset_token => "anything") }
-    let(:mail) { UserMailer.password_reset }
+      describe UserMailer do
+        describe "password_reset" do
+          include FreezingEmail::Rspec 
 
-    it "send user password reset url" do
-      mail.subject.should eq("Password reset")
-    end
-  end
-end
+          let(:user) { FactoryGirl.create(:user, :password_reset_token => "anything") }
+          let(:mail) { UserMailer.password_reset }
+
+          it "send user password reset url" do
+            mail.subject.should eq("Password reset")
+            mail.deliver
+          end
+        end
+      end
       """
     When I successfully run `bundle exec rspec`
     Then the output should contain "2 examples, 0 failures, 1 pending"
+    Then a file named "freezed_emails/password_resets" should exist

@@ -9,12 +9,10 @@ module FreezingEmail::Rspec
     after(:each) do |example_group|
       dir = FreezingEmail::Config[:store_path]
 
-      Dir.mkdir(notifications_dir) unless Dir.exists?(notifications_dir)
-
       ActionMailer::Base.deliveries.each do |mail|
-        filename ="#{mail.subject.parameterize.tableize}.html"
-        file_name = File.join(notifications_dir, filename)
-        File.open(file_name, 'w') { |f| f.puts YAML::dump(mail) }
+        name ="#{mail.subject.parameterize.tableize}"
+
+        FreezingEmail::Storage.save(name, mail)
       end
     end
   end
