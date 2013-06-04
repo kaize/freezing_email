@@ -3,11 +3,12 @@ module FreezingEmail::Rspec
 
   included do
     before(:all) do
-      FileUtils.rm_rf(Rails.root.join("event_notifications_preview/"))
+      FreezingEmail::Storage.cleanup
     end
 
     after(:each) do |example_group|
-      notifications_dir = Rails.root.join("event_notifications_preview/")
+      dir = FreezingEmail::Config[:store_path]
+
       Dir.mkdir(notifications_dir) unless Dir.exists?(notifications_dir)
 
       ActionMailer::Base.deliveries.each do |mail|
