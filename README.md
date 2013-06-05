@@ -1,25 +1,55 @@
 # FreezingEmail
 
-TODO: Write a gem description
+Saving emais from your Rails app and view it later
 
 ## Installation
- mount FreezingEmail::Web, at: "/freezed_emails", as: :freezing_email
 
 Add this line to your application's Gemfile:
 
-    gem 'freezing_email'
+```ruby
+gem 'freezing_email'
+```
 
 And then execute:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install freezing_email
+```
+ $ bundle
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+*Now supported only rspec integration*
+
+### Rspec integration
+
+Include `FreezingEmail::Rspec` in your rspec test in wich your want to
+save email messages. Looks like this:
+
+```ruby
+describe UserMailer do
+  describe "password_reset" do
+    include FreezingEmail::Rspec 
+  end
+end
+```
+
+Then on each test FreezingEmail will save generated deliveres in it's
+store folder.
+
+### Configure store path
+
+```ruby
+  FreezingEmail::Config[:store_path] = "your_sexy_dir"
+```
+
+### Viewing saved emails
+
+To view saved emails, include this lines in your `routes.rb`:
+
+```ruby
+  mount FreezingEmail::Web, at: "/freezed_emails", as: :freezing_email
+```
+
 
 ## Contributing
 
