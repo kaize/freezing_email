@@ -1,5 +1,6 @@
 require "yaml"
 require "active_support/concern"
+require "mail"
 
 require "freezing_email/version"
 
