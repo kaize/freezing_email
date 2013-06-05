@@ -14,6 +14,19 @@ describe 'FreezingEmail::Web The Web Fase' do
 
     get '/'
     last_response.should be_ok
-    last_response.body.should match 'Password reset'
+  end
+
+  it "shows email" do
+    FreezingEmail::Config[:store_path] = File.expand_path('../../../fixtures/', __FILE__)
+
+    get '/password_resets/'
+    last_response.should be_ok
+  end
+
+  it "shows email" do
+    FreezingEmail::Config[:store_path] = File.expand_path('../../../fixtures/', __FILE__)
+
+    get '/password_resets/source'
+    last_response.should be_ok
   end
 end
