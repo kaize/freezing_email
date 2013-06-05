@@ -18,13 +18,16 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "slim", ">= 1.1.0"
-  spec.add_runtime_dependency "sinatra"
   spec.add_runtime_dependency "rails", "~> 3.2.0"
+  spec.add_runtime_dependency 'mail', '~> 2.5.3'
+  spec.add_runtime_dependency "sinatra"
+  spec.add_runtime_dependency "haml"
 
   spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "rack"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec", "~> 2.6"
   spec.add_development_dependency "cucumber", "~> 1.0.0"
   spec.add_development_dependency "aruba"
+  spec.add_development_dependency "coveralls"
 end

@@ -11,6 +11,17 @@ class FreezingEmail::Storage
       FileUtils.rm_rf(list)
     end
 
+    def index
+      objects = []
+      emails = Dir.glob(File.join(dir, '*'))
+
+      emails.each do |email|
+        objects << load(File.basename(email))
+      end
+
+      objects
+    end
+
     def save(file_name, object)
       File.open(File.join(dir, file_name), 'w') { |f| f.puts YAML::dump(object) }
     end

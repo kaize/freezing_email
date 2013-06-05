@@ -30,6 +30,15 @@ describe FreezingEmail::Storage do
     loaded_object.should eq object
   end
 
+  it 'should return list of stored obejcts' do
+    fixtures = Dir[File.expand_path('../../../fixtures/*', __FILE__)]
+    objects = FreezingEmail::Config[:store_path]
+
+    FileUtils.cp_r(fixtures, objects)
+    objects = FreezingEmail::Storage.index
+    objects.first.should be_a_kind_of(FreezingEmail::Mail)
+  end
+
   after do
      FileUtils.remove_entry(FreezingEmail::Config[:store_path])
   end
