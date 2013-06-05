@@ -10,15 +10,11 @@ module FreezingEmail::Rspec
       dir = FreezingEmail::Config[:store_path]
 
       ActionMailer::Base.deliveries.each do |mail|
-        name ="#{mail.subject.parameterize.tableize}"
-
-        FreezingEmail::Storage.save(name, FreezingEmail::Mail.new({
-          subject: mail.subject,
-          body: mail.body,
-          to: mail.to,
-          from: mail.from,
+        freezing_mail = FreezingEmail::Mail.new(mail, {
           generated_in: example_group.example.description
-        }))
+        })
+
+        FreezingEmail::Storage.save(freezing_mail.name, freezing_mail)
       end
     end
   end

@@ -1,11 +1,12 @@
 class FreezingEmail::Mail
-  attr_accessor :subject, :body, :from, :to, :generated_in
+  attr_reader :original_mail, :subject, :body, :from, :to, :generated_in
 
-  def initialize(params)
-    @subject = params[:subject] if params.has_key?(:subject)
-    @body = params[:body] if params.has_key?(:body)
-    @from = params[:from] if params.has_key?(:from)
-    @to = params[:to] if params.has_key?(:to)
+  def initialize(mail, params)
+    @original_mail = mail
+    @subject = mail.subject
+    @body = mail.body
+    @to = mail.to
+    @from = mail.from
     @generated_in = params[:generated_in] if params.has_key?(:generated_in)
   end
 
