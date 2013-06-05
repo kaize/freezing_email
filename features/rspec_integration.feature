@@ -13,7 +13,7 @@ Feature: Capture and save emails generated in rspec test
     And I successfully run `bundle exec rake db:migrate RAILS_ENV=test`
 
   @disable-bundler
-  Scenario: Using Valle automatically sets validations
+  Scenario: Unsng FreezingEmail to capture emails in rspec test
     When I write to "spec/mailers/user_mailer_spec.rb" with:
       """
       require 'spec_helper'
