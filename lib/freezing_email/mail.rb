@@ -8,4 +8,8 @@ class FreezingEmail::Mail
     @to = params[:to] if params.has_key?(:to)
     @generated_in = params[:generated_in] if params.has_key?(:generated_in)
   end
+
+  def name
+    @name ||= "#{@subject.parameterize.tableize}"
+  end
 end

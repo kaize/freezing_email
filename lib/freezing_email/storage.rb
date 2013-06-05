@@ -12,8 +12,8 @@ class FreezingEmail::Storage
     end
 
     def index
-      objects = []
       emails = Dir.glob(File.join(dir, '*'))
+      objects = []
 
       emails.each do |email|
         objects << load(File.basename(email))
