@@ -3,6 +3,7 @@
 TODO: Write a gem description
 
 ## Installation
+ mount FreezingEmail::Web, at: "/freezed_emails", as: :freezing_email
 
 Add this line to your application's Gemfile:
 
