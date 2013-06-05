@@ -16,3 +16,4 @@ Feature: Web face
       """
     When I successfully run `bundle exec rake routes`
     Then the output should contain "/freezed_emails"
+    Then the output should contain "freezing_email"
