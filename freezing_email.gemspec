@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = FreezingEmail::VERSION
   spec.authors       = ["Andrew8xx8"]
   spec.email         = ["avk@8xx8.ru"]
-  spec.description   = %q{Saving emais from your Rails app and view it later}
-  spec.summary       = %q{Saving emais from your Rails app and view it later}
-  spec.homepage      = ""
+  spec.description   = %q{Saving email messages from your Rails app and view it later}
+  spec.summary       = %q{Saving email messages from your Rails app and view it later}
+  spec.homepage      = "https://github.com/kaize/freezing_email"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
