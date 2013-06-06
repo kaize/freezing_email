@@ -34,4 +34,4 @@ Feature: Capture and save emails generated in rspec test
       """
     When I successfully run `bundle exec rspec`
     Then the output should contain "2 examples, 0 failures, 1 pending"
-    Then a file named "freezed_emails/password_resets" should exist
+    Then a file named "freezed_emails/password_resets.yml" should exist
