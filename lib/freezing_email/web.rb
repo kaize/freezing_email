@@ -77,7 +77,7 @@ __END__
           clear: both;
         }
         .container, .email-meta {
-          font-family: helvetica;
+          font-family: arial;
           -webkit-border-radius: 5px;
           border-radius: 5px;
           -webkit-box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.5);
@@ -93,7 +93,7 @@ __END__
           width: 100%
         }
         .email-list {
-          font-family: helvetica;
+          font-family: arial;
           margin: 0;
           padding: 0;
         }
@@ -122,7 +122,7 @@ __END__
         }
         .email-meta th, .email-meta td {
           color :#fff;
-          font-family: helvetica;
+          font-family: arial;
           margin: 1px;
           padding: 2px 4px;
         }
@@ -151,17 +151,17 @@ __END__
     %tr
       %td
         Subject
-      %th
+      %td
         = email.subject.to_s
     %tr
       %td
         From
-      %th
+      %td
         = email.from
     %tr
       %td
         To
-      %th
+      %td
         = email.to
 
 .container-big
