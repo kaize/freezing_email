@@ -6,6 +6,8 @@ if ENV['TRAVIS']
   Coveralls.wear!
 end
 
+require 'rack/test'
+
 RSpec.configure do |config|
   include Rack::Test::Methods
 end
