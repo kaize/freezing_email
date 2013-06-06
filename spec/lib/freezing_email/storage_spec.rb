@@ -4,17 +4,33 @@ require 'tempfile'
 describe FreezingEmail::Storage do
   before do
     FreezingEmail::Config[:store_path] = Dir.mktmpdir
+
+    fixtures = Dir[File.expand_path('../../../fixtures/*', __FILE__)]
+
+    objects = FreezingEmail::Config[:store_path]
+    FileUtils.cp_r(fixtures, objects)
   end
 
   it 'should cleanup' do
     Dir.exists?(FreezingEmail::Config[:store_path]).should be true
 
-    File.open(File.join(FreezingEmail::Config[:store_path], 'test'), 'w') { |f| f.puts 'test' }
-
     FreezingEmail::Storage.cleanup
 
     files = Dir.glob(File.join(FreezingEmail::Config[:store_path], '/*'))
     files.count.should be 0
+  end
+
+  it 'should cleanup by mask' do
+    mask = 'mask'
+
+    object = {test: [1, 2, 3, 4]}
+
+    FreezingEmail::Storage.save("#{mask}_password_resets.yml", object)
+
+    FreezingEmail::Storage.cleanup(mask)
+
+    files = Dir.glob(File.join(FreezingEmail::Config[:store_path], '/*'))
+    files.count.should be 1
   end
 
   it 'should save/load object' do
@@ -31,11 +47,8 @@ describe FreezingEmail::Storage do
   end
 
   it 'should return list of stored obejcts' do
-    fixtures = Dir[File.expand_path('../../../fixtures/*', __FILE__)]
-    objects = FreezingEmail::Config[:store_path]
-
-    FileUtils.cp_r(fixtures, objects)
     objects = FreezingEmail::Storage.index
+
     objects.first.should be_a_kind_of(FreezingEmail::Mail)
   end
 

@@ -1,33 +1,25 @@
 class FreezingEmail::Storage
   class << self
-    def cleanup
-      path = FreezingEmail::Config[:store_path]
-
-      if defined?(Rails)
-        path = Rails.root.join(path)
-      end
-
-      list = Dir.glob(File.join(path, '/*'))
-      FileUtils.rm_rf(list)
+    def cleanup(mask = "")
+      FileUtils.rm_rf(files_list(mask))
     end
 
     def index
-      emails = Dir.glob(File.join(dir, '*'))
-      objects = []
+      emails = []
 
-      emails.each do |email|
-        objects << load(File.basename(email))
+      files_list.each do |file|
+        emails << load(file)
       end
 
-      objects
+      emails
     end
 
-    def save(file_name, object)
-      File.open(File.join(dir, file_name), 'w') { |f| f.puts YAML::dump(object) }
+    def save(name, object)
+      File.open(expand_name(name), 'w') { |f| f.puts YAML::dump(object) }
     end
 
-    def load(file_name)
-      file_name = File.join(dir, file_name)
+    def load(name)
+      file_name = expand_name(name)
       if File.exists?(file_name)
         YAML::load(IO.read(file_name))
       end
@@ -43,6 +35,18 @@ class FreezingEmail::Storage
       Dir.mkdir(dir) unless Dir.exists?(dir)
 
       dir
+    end
+
+    private
+
+    def files_list(mask = "")
+      Dir.glob(File.join(dir, "#{mask}*.yml"))
+    end
+
+    def expand_name(name)
+      name = File.join(dir, "#{File.basename(name)}")
+      name = "#{name}.yml" unless File.extname(name) == ".yml"
+      name
     end
   end
 end
