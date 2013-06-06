@@ -1,4 +1,5 @@
 # FreezingEmail
+[![Build Status](https://travis-ci.org/kaize/freezing_email.png?branch=master)](https://travis-ci.org/kaize/freezing_email)
 
 Saving emais from your Rails app and view it later
 
