@@ -11,10 +11,11 @@ module FreezingEmail::Rspec
 
       ActionMailer::Base.deliveries.each do |mail|
         freezing_mail = FreezingEmail::Mail.new(mail, {
-          generated_in: example_group.example.description
+          generated_in: example_group.example.description.to_s
         })
 
         FreezingEmail::Storage.save(freezing_mail.name, freezing_mail)
+        puts "FreezingEmail: Saved email #{freezing_mail.name}"
       end
     end
   end

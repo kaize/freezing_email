@@ -19,7 +19,7 @@ describe 'FreezingEmail::Web The Web Fase' do
   it "shows email" do
     FreezingEmail::Config[:store_path] = File.expand_path('../../../fixtures/', __FILE__)
 
-    get '/password_resets/'
+    get '/password_resets/view'
     last_response.should be_ok
   end
 
