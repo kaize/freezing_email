@@ -1,5 +1,6 @@
 # FreezingEmail
 [![Build Status](https://travis-ci.org/kaize/freezing_email.png?branch=master)](https://travis-ci.org/kaize/freezing_email)
+[![Coverage Status](https://coveralls.io/repos/kaize/freezing_email/badge.png?branch=master)](https://coveralls.io/r/kaize/freezing_email?branch=master)
 
 Saving email messages from your Rails app and view it later
 
